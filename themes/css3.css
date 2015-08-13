@@ -1,0 +1,92 @@
+@font-face{
+	font-family: myFont;
+	src: url(../public/font/ygyxsziti2.0.ttf);
+}
+
+div { width: 100px; height: 100px; background: #eee; margin: 20px;}
+
+/*box-radiu            box-shaow: 水平 垂直*/
+#border { border: 1px solid #f6f; border-radius: 20px; box-shadow: 10px 10px 5px #888;}
+#border-image { border-image: url(../public/img/border.png) 14 14 round; }
+
+/* background-origin 定位区域 background-clip 绘制区域 */
+#bg-image { background: url(../public/img/2.jpg); background-repeat: no-repeat; 
+	background-size: 230%; background-position: 0 -138px; 
+	background-origin: content-box; background-clip: content-box; padding: 30px; 
+	box-sizing: content-box;
+	/*box-sizing表示哪些内容算到宽高度中 box-sizing: border-box 表示 padding会减少元素的宽高度*/
+}
+
+#text-shadow { text-shadow: 5px 5px 3px #f6f; font-weight: bold;}
+
+/* white-space: nowrap 表示所有的文本显示在一行 */
+#word { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: myFont;}
+
+/* 位置偏移:translate(水平 垂直)		大小比例:scale(宽度,高度)	旋转角度:rotate(角度)  倾斜转换:skew(x轴,y轴);  */
+#transform { transform: translate(0px,0px) rotate(0deg) scale(1,1) skew(0deg,0deg);}
+
+/* 沿XYZ轴(中点)旋转 rotateX rotateY rotateZ */
+#transform-3d { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);}
+
+#transition { height: 50px; background: #6f6; transition: background 1s,transform 1s;}
+#transition:hover { background: #f66; transform: rotate(180deg);}
+#transition3d { height: 50px; background: #6f6; transition: background 1s,transform 1s;}
+#transition3d:hover { background: #f66; transform: rotateY(360deg);}
+
+/*
+@keyframes
+@-moz-keyframes    				firefox
+@-webkit-keyframes 				chrome safari
+@-o-keyframes   				opera
+*/
+@-webkit-keyframes myFrame {
+	0% { background: #eee; left: 0;}
+	25% { background: yellow; left: 500px; transform: rotate(180deg) rotateX(180deg); }
+	50% { background: #eee; left: 200px; transform: rotate(0) rotateX(0); }
+	75% { background: red; left: 400px; transform: rotate(180deg) rotateX(180deg); }
+	100% { background: #eee; left: 0; transform: rotate(0) rotateX(0);}
+}
+/*
+animation
+-moz-animation
+-webkit-animation
+-o-animation
+*/
+#animation { position:relative; -webkit-animation: myFrame 5s;}
+
+.column-3 { -webkit-column-count: 3; -webkit-column-gap: 50px;}
+
+#link { position:relative; left:0; color: yellow; transition: all 2s;}
+#link:hover { left: 100px; color: red;}
+
+@-webkit-keyframes mframe{
+	from { left: 0; top: 0;}
+	50% { left: 0; top: 20px; transform: rotate(60deg);}
+	75% { left: 200px; top: 20px; }
+	to { left: 200px; top: 0; transform: rotate(0deg);}
+}
+#myanimate { position:relative; left:200px; -webkit-animation: mframe 5s;} 
+
+@-webkit-keyframes rotatebg{
+	
+	from { left: -500px; }
+	to { left: 105px;}
+}
+
+@-webkit-keyframes fade{
+	from { opacity: 1;}
+	99% { opacity: 0.99;}
+	to { opacity: 0; }
+}
+
+.rotatebg { width: 500px; height: 500px;}
+.bg-rotate { position: absolute; width: 100%; height: 100%; opacity: 0;}
+
+
+
+.bg-rotate:target { -webkit-animation: rotatebg 3s; z-index: 10; opacity: 1;}
+.bg-rotate:not(:target) { -webkit-animation: fade 3s;}
+#bg1 { background: yellow;}
+#bg2 { background: red;}
+#bg3 { background: blue;}
+#bg4 { background: green;}

@@ -1,0 +1,8 @@
+.banner-img { width: 100%;}
+.common-question { width: 54%; padding: 0 23%;}
+.common-question-title { font-size: 22px; font-weight: bold; color: #1c5c78; line-height: 88px;}
+.common-question-main { margin-bottom: 20px; padding: 0 4px;}
+.question-title { font-size: 17px; font-weight: bold; color: #5a5a5a; padding-left: 35px; 
+	background: url(img/首页-question.png) no-repeat; background-size: 30px 27px; background-position: left;
+	line-height: 38px;}
+.question-main { font-size: 15px; font-weight: bold; color: #8b8b8b;}

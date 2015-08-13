@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../../themes/common/reset.css">
+		<link rel="stylesheet" href="../../themes/lmm/lmm.css">
+		<link rel="shortcut icon" href="../../public/img/balloon.png">
+		<title>详细信息</title>
+	</head>
+	<body>
+	<div class="bg-grey" style="min-height: calc(100vh)">
+		<header class="lmm-header bg-grey">
+			<a href="lmm-2.html"></a>
+			<h1>开立电子账户</h1>
+			<p>
+				<span class="c-step">
+					第<em>4</em>步
+				</span>
+				<span class="t-step col-grey"> 
+					/共<em>4</em>步
+				</span>
+			</p>
+		</header>
+		<form>
+			<div class="form-block">
+				<div class="form-line">
+					<label>借记卡号</label>
+					<input placeholder="暂不支持华夏、广发、招商银行的账户">
+				</div>
+				<div class="form-line">
+					<label>预留手机号</label>
+					<input placeholder="请输入预留手机号码">
+				</div>
+			</div>
+		</form>
+		<p class="agree">
+			本人已阅读并同意
+			<em id="serviceRule" class="col-blue">北京银行电子账户服务协议</em>
+		</p>
+		<p class="agree">
+			本人(<em id="userName">xxx</em>)承诺提交贷款申请时所使用的个人信息适用于开立北京银行直销银行电子商户
+		</p>
+		<p class="col-grey explain">
+			说明：请填写本人名下借记卡，在线开具北京银行直销银行电子账户，用户保证金和存款证明的放款和还款。（如您已有北京银行直销银行电子账户，将使用您现有的电子账户）
+		</p>
+
+		<footer class="lmm-footer">
+			<div id="showPayDetail" class="show-pay-detail">
+				应付金额：<span class="col-pink">¥<em id="pay-money">3455</em></span>
+			</div>
+			<a class="next" href="lmm-0.html">
+				下一步
+			</a>
+			<aside class="pay-detail" id="payDetail">
+				<h2 class="col-black bg-grey">费用明细</h2>
+				<p>
+					<label class="col-grey">利息</label>
+					<span class="col-pink fr">
+						¥<em id="interst">2500</em>
+						<em class="col-black">×1</em>
+					</span>
+				</p>
+				<p>
+					<label class="col-grey">工本费</label>
+					<span class="col-pink fr">
+						¥<em id="costPay">2500</em>
+						<em class="col-black">×1</em>
+					</span>
+				</p>
+				<p>
+					<label class="col-grey">快递费用</label>
+					<span class="col-pink fr">
+						¥<em id="expPay">2500</em>
+						<em class="col-black">×1</em>
+					</span>
+				</p>
+			</aside>
+		</footer>
+	</div>
+	<div class="confirm-dialog">
+		<article id="serviceRuleDetail">
+			<i></i>
+			<h2>北京银行电子账户服务协议</h2>
+			<p>
+				本条款一经申请人在北银消费金融有限公司自有平台或合作商户平台（包括但不限于网站、移动客户端等）的相关网页上点击 “确认”或“同意条款并申请”按钮，即表明申请人已经先行认真阅读了本条款的全部内容，完全理解和认可本条款的全部内容且无异议。本条款于申请人点击“确认”或“同意条款并申请”按钮之时自动生效，并发生法律效力。
+			</p>
+			<h3>1 定义与解释</h3>
+			<p>
+				1.1在本条款中，“本贷款”指轻松e贷个人旅游贷款，即本公司直接向申请人发放的用于办理个人及家庭旅游所需的存款证明和保证金的贷款。本公司是指北银消费金融有限公司。 “本合同”指申请信息、本条款等相关文件，及此后对前述文件所作的修改。“申请人”指于本公司自有平台或合作商户平台向本公司申请本贷款的个人。“中国法律法令”指中华人民共和国的法律、行政法规、最高人民法院的司法解释以及金融监管机构
+			</p>
+		</article>
+	</div>
+	<div class="mask"></div>
+	<div class="mask-t"></div>
+	<script src="../../public/libs/jquery.js"></script>
+	<script src="../../public/js/lmm/lmm.js"></script>
+	</body>
+</html>

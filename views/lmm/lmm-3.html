@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../../themes/common/reset.css">
+		<link rel="stylesheet" href="../../themes/lmm/lmm.css">
+		<link rel="shortcut icon" href="../../public/img/balloon.png">
+		<title>详细信息</title>
+	</head>
+	<body>
+	<div class="bg-grey" style="min-height: calc(100vh)">
+		<header class="lmm-header bg-grey">
+			<a href="lmm-2.html"></a>
+			<h1>详细信息</h1>
+			<p>
+				<span class="c-step">
+					第<em>3</em>步
+				</span>
+				<span class="t-step col-grey"> 
+					/共<em>4</em>步
+				</span>
+			</p>
+		</header>
+		<form>
+			<div class="form-block">
+				<div class="form-line">
+					<label>婚姻状况</label>
+					<select>
+						<option>请选择申请人的婚姻状况</option>
+					</select>
+				</div>
+				<div class="form-line">
+					<label>教育程度</label>
+					<select>
+						<option>请选择申请人的受教育程度</option>
+					</select>
+				</div>
+				<div class="form-line-multi">
+					<label>家庭地址</label>
+					<select class="bd-b-grey">
+						<option>请选择所在地区</option>
+					</select>
+					<input placeholder="请输入详细地址">
+				</div>
+				<div class="form-line">
+					<label>公司名称</label>
+					<select>
+						<option>请输入公司名称</option>
+					</select>
+				</div>
+				<div class="form-line-multi">
+					<label>公司地址</label>
+					<select>
+						<option>请选择所在地区</option>
+					</select>
+					<input>
+				</div>
+				<div class="form-line">
+					<label>公司电话</label>
+					<div class="tel-block">
+						<input>
+						<span>—</span>
+						<input>
+					</div>
+				</div>
+				<div class="form-line">
+					<label>快递地址</label>
+					<select>
+						<option>请选择收件地址</option>
+					</select>
+				</div>
+			</div>
+		</form>
+		<p class="col-grey explain">说明：根据银行规定，收件人必须与申请人一致</p>
+		
+		<footer class="lmm-footer">
+			<div id="showPayDetail" class="show-pay-detail">
+				应付金额：<span class="col-pink">¥<em id="pay-money">3455</em></span>
+			</div>
+			<a class="next" href="lmm-4.html">
+				下一步
+			</a>
+			<aside class="pay-detail" id="payDetail">
+				<h2 class="col-black bg-grey">费用明细</h2>
+				<p>
+					<label class="col-grey">利息</label>
+					<span class="col-pink fr">
+						¥<em id="interst">2500</em>
+						<em class="col-black">×1</em>
+					</span>
+				</p>
+				<p>
+					<label class="col-grey">工本费</label>
+					<span class="col-pink fr">
+						¥<em id="costPay">2500</em>
+						<em class="col-black">×1</em>
+					</span>
+				</p>
+				<p>
+					<label class="col-grey">快递费用</label>
+					<span class="col-pink fr">
+						¥<em id="expPay">2500</em>
+						<em class="col-black">×1</em>
+					</span>
+				</p>
+			</aside>
+		</footer>
+	</div>
+	<div class="confirm-dialog"></div>
+	<div class="mask"></div>
+	<div class="mask-t"></div>
+	<script src="../../public/libs/jquery.js"></script>
+	<script src="../../public/js/lmm/lmm.js"></script>
+	</body>
+</html>

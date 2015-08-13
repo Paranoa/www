@@ -1,0 +1,23 @@
+#tooltip { width: 100px; height: 100px; background: #f0f0f0; display: none;}
+.btn { width: 100px; height: 50px;}
+.active { width: 100px; height: 50px; background: red;}
+#tab input { float: left;}
+#tab div { width: 300px; height: 200px; background: yellow; display: none;}
+/*菜单*/
+#menu aside { float: left;}
+#menu section { float: left;}
+.menu { display: none;}
+#menu1 { display: block;}
+.menu div { width: 100px; height: 40px; background: #f0f0f0; border: 1px solid yellow;}
+.floatfix:after { content: ""; display: table; clear: both;}
+
+/*滑动*/
+#slide { width: 400px; position: relative; overflow: hidden; height: 140px;}
+#imgSlide { list-style: none; position: absolute; padding: 0; margin: 0;}
+#imgSlide a {display: block;}
+#imgSlide li { float: left; }
+#imgSlide img { width: 100px; height: 100px; margin: 5px;}
+
+/*评分*/
+#score div { float: left; width: 17px; height: 17px; padding: 3px; border: 1px solid blue;}
+.scoreActive { background: yellow;}

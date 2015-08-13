@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+   
+
+</head>
+
+<body>
+<button id="btnTest">BtnTest</button>
+<div>
+     <div class="text_con" >这是一段比较长的文字，用来测试是否文字溢出时会用省略号显示。</div>
+ </div>
+<script src="../public/libs/jquery.js" ></script>
+<script>
+    // function CreateScript(src) {
+    //     $("<script><//script>").attr("src", src).appendTo("body")
+    // }
+
+    // $("#btnTest").click(function () {
+
+    //     $.get('//localhost/merchant/merchant/wechat_ctl_c/testInjectOpenId/oNm4Ps5EoNylxidnLBxYiNWHdHx4/3668', function (data) {
+    //         console.log(data)
+    //     })
+    // })
+
+    $("#btnTest").click(function () {
+        $.ajax({
+            url: '//localhost/merchant/merchant/wechat_ctl_c/testInjectOpenId/oNm4Ps5EoNylxidnLBxYiNWHdHx4/3668',
+            dataType: "jsonp",
+            jsonp: "callback",
+            success: function (data) {
+                console.log(data)
+            }
+        })
+    })
+
+</script>
+</body>
+</html>

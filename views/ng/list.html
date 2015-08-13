@@ -1,0 +1,13 @@
+<div>
+list
+<dl ng-repeat="p in phones">
+	<dd><a href="#/phones/{{p.id}}">{{p.name}}</a></dd>
+</dl>
+<form name='myForm'>
+	<input name='personEmail' required type='email' ng-model='person.email'/>
+	<span ng-show='myForm.personEmail.$error.required'>必填</span>
+	<span ng-show='myFrom.personEmail.$error.email'>格式不正确</span>
+	<button ng-disabled='myForm.$invalid'>submit</button>
+</form>
+
+</div>

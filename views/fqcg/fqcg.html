@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0 ,user-scalable=no"/>
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../../themes/common/reset.css"/>
+		<link rel="stylesheet" href="../../themes/fqcg/fqcg.css"/>
+		<title>分期闯关达人</title>
+	</head>
+	<body>
+	<div class="main-container">
+		<div class="main-pages">
+			<section class="main-page ready-page">
+				<a class="btn-orange" id="start">立即参加</a>
+			</section>
+			<section class="main-page rule-page"></section>
+			<!-- 判断题 -->
+			<div id="judgQuestions"></div>
+			<!-- 选择题 -->
+			<div id="selectQuestions"></div>
+			<!-- 排行榜 -->
+			<section class="main-page go-rank-page">
+				<i class="rocket"></i>
+				<a href="javascript:;" class="btn-white" id="goRank">查看排行榜</a>
+			</section>
+			<section class="main-page rank-page">
+				<i class="rank"></i>
+				<ul class="rank-list" id="rankList">
+				</ul>
+			</section>
+		</div>
+	</div>
+	<aside class="wrong">
+		<img src="../../themes/fqcg/img/wrong.png">
+		<a id="restart">重新开始</a>
+	</aside>
+	<script src="../../public/libs/jquery.js"></script>
+	<script src="../../public/js/fqcg/fqcg.js"></script>
+	</body>
+</html>

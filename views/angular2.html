@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div ng-app="myFirstApp" ng-init="ss='lgy'" ng-controller="moduleController">
+	<section style="display: none;">
+	{{ss}}
+	{{module()}}
+	<input ng-model="namefilter"/>
+	
+	<ul>
+	   <li ng-repeat = "p in pples | orderBy:'id' | filter: namefilter ">
+	    {{p.name|uppercase}}:{{p.age}}
+	   </li>
+	</ul>
+
+	<div></div>
+	<button ng-disabled='flg'>ng-disabled</button>
+	<button ng-show='flg'>ng-show</button>
+	<button ng-hide='flg'>ng-hide</button>
+	<input type='checkbox' ng-model='flg'/>switch
+	<button ng-click='toggle()'>toggle</button>
+	<p ng-bind='flg'></p>
+
+	<button ng-click='clkcount = clkcount + 1'>ng-click</button>
+	<p ng-bind='clkcount'></p>
+
+	<input ng-model="name.fname" ng-disabled="edit"/>
+	<input ng-model="name.lname" ng-disabled="edit"/>
+	<button ng-click='reset()'>reset</button>
+	<input ng-model="psd" type="password"/>
+	<input ng-model="repsd" type="password"/>
+	<button>edit</button>
+	<button ng-disabled="error||incomplete" >submit</button>
+	<p>{{name}}</p>
+	<p>{{oringin}}</p>
+	<button ng-click="newUser()">new</button>
+	<ul ng-repeat="u in users">
+		<li>{{u.fName}}.{{u.lName}} <button ng-click = "editUser(u.id)">edit</button></li>
+	</ul>
+	
+	</section>
+
+	<form ng-submit="submit()" ng-init="a=!b">
+		a={{a}}  b={{b}} !b={{!b}}
+		<button>submit</button>
+		<input type="checkbox" ng-model="if"/>
+		<button ng-if="if">if</button>
+	</form>
+
+
+</div>
+
+
+<script src="../public/libs/angular.min.js"></script>
+<script> 
+function peoplesController($scope,$http){
+  // $http.get("").success(function(response){
+  // 	$scope.pples = response;
+  // })
+}
+
+// var moduleController = ['$scope',function($scope){}]
+// app.controller("moduleController",function(){})
+
+var app = angular.module("myFirstApp",[]);
+app.controller("moduleController",['$scope',function($scope){
+	$scope.flg = false;
+	$scope.oringin = {fname:'john',lname:'doe'};
+  	$scope.name = angular.copy($scope.oringin);
+  	$scope.psd = "";
+  	$scope.repsd = "";
+  	$scope.error = false;
+  	$scope.incomplete = false;
+  	$scope.users = [
+	    {id:1, fName:'Hege'  , lName:"Pege" },
+	    {id:2, fName:'Kim'   , lName:"Pim" },
+	    {id:3, fName:'Jack'  , lName:"Jones" },
+	    {id:4, fName:'John'  , lName:"Doe" },
+	    {id:5, fName:'Peter' , lName:"Pan" }
+	];
+	$scope.edit = false;
+
+	$scope.module = function(){
+		return 'moduleSuccess!';
+	};
+  	$scope.toggle = function(){
+  		$scope.flg = !$scope.flg;
+  	};
+  	$scope.reset = function(){
+  		// $scope.name = {fname:'john',lname:'doe'};
+ 		$scope.name = angular.copy($scope.oringin);
+  	};
+  	$scope.test = function(){
+  		$scope.error = ($scope.psd != $scope.repsd);
+  		$scope.incomplete = (!$scope.name.fname.length || !$scope.name.lname.length)
+  	};
+  	$scope.editUser = function(id){
+  		$scope.edit = true;
+  		console.log($scope.users[id-1].fName)
+  		$scope.name.fname = $scope.users[id-1].fName;
+  		$scope.name.lname = $scope.users[id-1].lName;
+  	}
+  	$scope.newUser = function(){
+  		$scope.edit = false;
+  		$scope.reset();
+  	}
+  	$scope.submit = function(){
+  		console.log('submit');
+  	}
+
+  	$scope.$watch("name.fname",function(){$scope.test()});
+  	$scope.$watch("name.lname",function(){$scope.test()});
+  	$scope.$watch("psd",function(){$scope.test()});
+  	$scope.$watch("repsd",function(){$scope.test()});
+}]);
+
+</script>
+</body>
+</html>
+

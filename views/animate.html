@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../themes/common/reset.css"/>
+		<link rel="shortcut icon" href="../public/img/balloon.png"/>
+		<style>
+			.loading-bar { width: 200px; height: 30px;}
+			.loading-bar div{ width: 0 ; height: 100%; background: green;}
+			.loading { -webkit-animation: loading ease-in alternate forwards infinite 3s 1s;} 
+
+			/*forwards表示动画结束之后保持结束的状态 backwards表示开始之前保持开始的状态 both为2合一*/
+
+			@-webkit-keyframes loading{
+				from { width: 0;}
+				to { width: 100%;}
+			}
+		</style>
+		<title>页面标题</title>
+	</head>
+	<body>
+	<div class="loading-bar" id="loadBar">
+		<div></div>
+	</div>
+	<button id="toLoad">Loading...</button>
+
+
+	<script src="../public/libs/jquery.js"></script>
+	<script>
+		$('#toLoad').click(function(){
+			$('#loadBar div').addClass('loading');
+		});
+	</script>
+	</body>
+</html>

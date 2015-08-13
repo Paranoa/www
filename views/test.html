@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link id="stylesheet" rel="stylesheet" href="../themes/test.css">
+		<link id="icon" rel="shortcut icon" href="">
+		<title>test</title>
+	</head>
+	<body>
+	<section style="display: none;">	
+		<p id="p1">qwerty</p>
+		<div id="tooltip">我在这儿呢！</div>
+		
+		<section id="tab">
+			<input type="button" class="btn" value="1" />
+			<input type="button" class="btn" value="2" />
+			<input type="button" class="btn" value="3" />
+
+			<div name="tabDiv" id="tabDiv1">11</div>
+			<div name="tabDiv" id="tabDiv2">22</div>
+			<div name="tabDiv" id="tabDiv3">33</div>
+		</section>
+		
+		<!-- 计时 -->
+		<section id="time" style="clear: both;">
+			<p>
+				<em id="hours"></em>时
+				<em id="minutes"></em>分
+				<em id="seconds"></em>秒
+			</p>
+		</section>
+
+		<!-- 菜单 -->
+		<section id="menu">
+			<section id="firstMenu" class="floatfix">
+				<aside id="menu1" class="menu">
+					<div nextMenu="menu2">1</div>
+					<div nextMenu="menu3">2</div>
+					<div>3</div>
+					<div>4</div>
+				</aside>
+			</section>
+				
+			<section id="secondMenu" class="floatfix">		
+				<aside id="menu2" class="menu">
+					<div nextMenu="menu4">1-1</div>
+					<div nextMenu="menu5">1-2</div>
+					<div>1-3</div>
+					<div>1-4</div>
+				</aside>
+				<aside id="menu3" class="menu">
+					<div>2-1</div>
+					<div>2-2</div>
+					<div>2-3</div>
+					<div>2-4</div>
+				</aside>	
+			</section>
+
+			<section id="thirdMenu" class="floatfix">		
+				<aside id="menu4" class="menu">
+					<div>hoho</div>
+					<div>haha</div>
+					<div>qwerty</div>
+					<div></div>
+				</aside>
+				<aside id="menu5" class="menu">
+					<div>哦也？</div>
+					<div>噢耶！</div>
+					<div>2-3</div>
+					<div>2-4</div>
+				</aside>	
+			</section>
+		</section>
+
+		<!-- 图片滑动 -->
+		<section>
+			<input type="button" id="slideLeft" value="+" />
+			<input type="button" id="slideRight" value="-" />
+			<section id="slide" class="floatfix">
+				<ul id="imgSlide" class="floatfix">
+					<li>
+						<a href=""><img src="../public/img/1.jpg"></a>
+					</li>
+					<li>
+						<a href=""><img src="../public/img/2.jpg"></a>
+					</li>
+					<li>
+						<a href=""><img src="../public/img/3.jpg"></a>
+					</li>
+					<li>
+						<a href=""><img src="../public/img/4.jpg"></a>
+					</li>	
+				</ul>	
+			</section>		
+		</section>
+		
+		<!-- 评分 -->
+		<section id="score" class="floatfix">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<p style="clear: both;"></p>	
+		</section>
+
+	</section>
+
+	
+		
+
+	<script src="../public/libs/jquery.js"></script>
+	<script src="../public/js/test.js" ></script>
+	</body>
+</html>

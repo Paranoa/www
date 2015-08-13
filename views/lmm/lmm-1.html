@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="../../themes/common/reset.css">
+		<link rel="stylesheet" href="../../themes/lmm/lmm.css">
+		<link rel="shortcut icon" href="../../public/img/balloon.png">
+		<title>申请项目</title>
+	</head>
+	<body>
+	<div class="bg-grey" style="min-height: calc(100vh)">
+		<header class="lmm-header bg-grey">
+			<a href="javascript:;"></a>
+			<h1>申请项目</h1>
+			<p>
+				<span class="c-step">
+					第<em>1</em>步
+				</span>
+				<span class="t-step col-grey"> 
+					/共<em>4</em>步
+				</span>
+			</p>
+		</header>
+		<div class="form-block">
+			<div class="form-line">
+				<label class="col-black">申请项目</label>
+				<select>
+					<option>请选择您要申请的项目</option>
+				</select>
+			</div>
+		</div>
+		<form>
+			<div class="form-block">
+				<div class="form-line">
+					<label>存款金额</label>
+					<input class="input-units" placeholder="大于1万小于20万">
+					<em class="units">元</em>
+				</div>
+				<div class="form-line">
+					<label>申请项目</label>
+					<select>
+						<option>请选择您要申请的项目</option>
+					</select>
+				</div>
+				<div class="form-line">
+					<label>申请期限</label>
+					<select>
+						<option>请选择申请期限类型</option>
+					</select>
+				</div>
+				<div class="form-line">
+					<label>开具起始</label>
+					<select>
+						<option>请选择起始日期</option>
+					</select>
+				</div>
+				<div class="form-line">
+					<label>开具截止</label>
+					<select>
+						<option>请选择截止日期</option>
+					</select>
+				</div>
+				<div class="form-line">
+					<label>开具张数</label>
+					<select>
+						<option>请选择开具张数</option>
+					</select>
+				</div>
+				<div class="form-line">
+					<label>费用说明</label>
+					<span class="col-grey" id="payExplain"></span>
+				</div>
+			</div>
+		</form>
+		<p class="agree">
+			同意预定须知和
+			<em id="loanRule" class="col-blue">轻松e贷个人旅游贷款条款</em>
+		</p>
+		<footer class="lmm-footer">
+			<div id="showPayDetail" class="show-pay-detail">
+				应付金额：<span class="col-pink">¥<em id="pay-money">3455</em></span>
+			</div>
+			<a class="next" href="lmm-2.html">
+				下一步
+			</a>
+			<aside class="pay-detail" id="payDetail">
+				<h2 class="col-black bg-grey">费用明细</h2>
+				<p>
+					<label class="col-grey">利息</label>
+					<span class="col-pink fr">
+						¥<em id="interst">2500</em>
+						<em class="col-black">×1</em>
+					</span>
+				</p>
+				<p>
+					<label class="col-grey">工本费</label>
+					<span class="col-pink fr">
+						¥<em id="costPay">2500</em>
+						<em class="col-black">×1</em>
+					</span>
+				</p>
+				<p>
+					<label class="col-grey">快递费用</label>
+					<span class="col-pink fr">
+						¥<em id="expPay">2500</em>
+						<em class="col-black">×1</em>
+					</span>
+				</p>
+			</aside>
+		</footer>
+	</div>
+	<div class="confirm-dialog">
+		<article id="loanRuleDetail">
+			<i></i>
+			<h2>轻松e贷个人旅游贷款条款</h2>
+			<p>
+				本条款一经申请人在北银消费金融有限公司自有平台或合作商户平台（包括但不限于网站、移动客户端等）的相关网页上点击 “确认”或“同意条款并申请”按钮，即表明申请人已经先行认真阅读了本条款的全部内容，完全理解和认可本条款的全部内容且无异议。本条款于申请人点击“确认”或“同意条款并申请”按钮之时自动生效，并发生法律效力。
+			</p>
+			<h3>1 定义与解释</h3>
+			<p>
+				1.1在本条款中，“本贷款”指轻松e贷个人旅游贷款，即本公司直接向申请人发放的用于办理个人及家庭旅游所需的存款证明和保证金的贷款。本公司是指北银消费金融有限公司。 “本合同”指申请信息、本条款等相关文件，及此后对前述文件所作的修改。“申请人”指于本公司自有平台或合作商户平台向本公司申请本贷款的个人。“中国法律法令”指中华人民共和国的法律、行政法规、最高人民法院的司法解释以及金融监管机构
+			</p>
+		</article>
+		<article id="payExplainDetail">
+			<i></i>
+			<h2>费用说明</h2>
+			<h3>利息：</h3>
+			<p>存款金额*年利率*0.035%*存款期限</p>
+			<h3>工本费：</h3>
+			<p>20元/张*开具张数</p>
+			<h3>快递费：</h3>
+			<p>23元，顺丰快递到付费用</p>
+		</article>
+	</div>
+	<div class="mask"></div>
+	<div class="mask-t"></div>
+	<script src="../../public/libs/jquery.js"></script>
+	<script src="../../public/js/lmm/lmm.js"></script>
+	</body>
+</html>

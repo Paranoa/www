@@ -1,0 +1,48 @@
+/*主页面*/
+.main-container { overflow: hidden; position: relative;}
+.main-pages { position: absolute; width: 100%;}
+.main-page { overflow: hidden; position: relative;}
+.ready-page { background: url(img/ready.png); background-size: 100% 100%;}
+.rule-page { background: url(img/rule.png); background-size: 100% 100%;}
+.judg-page { background: url(img/judg.png); background-size: 100% 100%;}
+.select-page { background: url(img/select.png); background-size: 100% 100%;}
+.go-rank-page { background: url(img/go-rank.png); background-size: 100% 100%;}
+.go-rank-page .rocket { display: block; width: 124px; height: 182px; background: url(img/rocket.png); background-size: 100% 100%; position: absolute; left: 50%; top: 250px; margin-left: -62px; transition: all 2s ease-in-out;}
+.go-rank-page .rocket-fly { top: -100px; transform: scale(0); }
+.rank-page { background: url(img/rank.png); background-size: 100% 100%; overflow: auto; padding-bottom: 30px;}
+.rank-page .rank { display: block; width: 142px; height: 45px; background: url(img/phb.png); background-size: 100% 100%; margin: 26px auto;}
+.rank-list { padding-bottom: 50px;}
+.rank-item { position: relative; color: #fff; width: 75%; margin: auto; line-height: 31px; font-size: 14px;}
+.rank-item-top { height: 67px; margin-left: 5%; padding: 0 10%; line-height: 79px; font-size: 16px;}
+.rank-item:nth-of-type(1) { background: url(img/one.png) 5px 30px no-repeat; background-size: 18px 22px;}
+.rank-item:nth-of-type(2) { background: url(img/two.png) 5px 30px no-repeat; background-size: 18px 22px;}
+.rank-item:nth-of-type(3) { background: url(img/three.png) 5px 30px no-repeat; background-size: 18px 22px; margin-bottom: 10px;}
+.rank-item .user-head { float: left; width: 36px; height: 36px; margin: 25px 8px 0; position: relative;}
+.rank-item:nth-of-type(1) .user-head:after { display: block; content: ''; width: 39px; height: 21px; background: url(img/crn-1.png); background-size: 100% 100%; position: absolute; left: 2px; top: -15px;}
+.rank-item:nth-of-type(2) .user-head:after { display: block; content: ''; width: 39px; height: 21px; background: url(img/crn-2.png); background-size: 100% 100%; position: absolute; left: 2px; top: -15px;}
+.rank-item:nth-of-type(3) .user-head:after { display: block; content: ''; width: 39px; height: 21px; background: url(img/crn-3.png); background-size: 100% 100%; position: absolute; left: 2px; top: -15px;}
+.rank-item em { display: inline-block; width: 17px; text-align: right; margin-left: -10px;}
+.rank-item .user-head img { width: 36px; height: 36px; }
+.rank-item .time-count { position: absolute; right: 0; top: 0; padding-left: 25px; background: url(img/clock-white.png) left center no-repeat; background-size: 17px 16px;}
+.rank-item-top .time-count { right: 10%;}
+
+.blur { -webkit-filter: blur(2px);}
+
+.clock { display: block; width: 32px; height: 30px; background: url(img/clock.png); background-size: 100% 100%; position: absolute; right: 22px; top: 8px; font-size: 12px; color: #fff; text-align: center; line-height: 30px; font-weight: bold;}
+.round-title { width: 68px; height: 68px; border-radius: 50%; background: #5098d2; position: absolute; left: 14px; top: 19px; }
+.round-title  i { display: block; width: 60px; height: 60px; border-radius: 50%; color: #ff9b00; background: #3685c0; line-height: 60px; text-align: center; font-weight: bold; position: absolute; left: 0; top: 0;
+right: 0; bottom: 0; margin: auto;}
+.btn-orange { position: absolute; display: block; width: 147px; height: 35px; line-height: 35px; background: #f7674f; color: #fff; text-align: center; font-size: 14px; font-weight: bold; border-radius: 5px; left: 50%; top: 75%; margin-left: -73.5px;}
+.btn-white { display: block; width: 184px; height: 37px; line-height: 37px; background: #fff; color: #6d6d6d; font-size: 18px; text-align: center; border-radius: 18px; position: absolute; left: 50%; margin-left: -92px; top: 75%;}
+
+/*对话框*/
+.dialog-block { width: 82%; margin: 115px 4% 0; background: rgba(255,255,255,.5); border-radius: 5px;
+ 	color: #ff9c00; padding: 15px 5% 22px; }
+.dialog-block .question { font-size: 14px; font-weight: bold; margin-bottom: 17px;}
+.dialog-block .btn { font-size: 13px; display: block; width: 200px; line-height: 20px; background: #fff; border-radius: 5px; margin: 10px auto; text-align: center; font-weight: bold; padding: 10px 10px;}
+
+.wrong { position: fixed; width: 100%; height: 100%; left: 0; top: 0; background: rgba(0,0,0,.3); display: none;}
+.wrong img { position: absolute; width: 216px; height: 237px; left: 50%; top: 58px; margin-left: -108px;}
+.wrong a { display: block; width: 173px; height: 38px; line-height: 38px; text-align: center;
+	background: #fff; color: #38a2e0; border-radius: 14px; position: absolute; left: 50%; top: 307px;
+	margin-left: -86.5px; font-size: 18px; font-weight: bold;}

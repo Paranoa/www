@@ -1,0 +1,67 @@
+body { overflow-y: scroll; background: #f2f2f2;}
+a { color: #666; font-size: 13px; transition: all .5s; cursor: pointer; }
+a:hover { color: #c33;}
+
+/*主体*/
+.game-main { background: #f2f2f2; width: 95%; min-width: 1020px; margin: 0 auto; padding-bottom: 80px;}
+.login { font-size: 12px; padding: 10px 5%;}
+.login span { color: #999;}
+.game-header { padding: 25px 5%; background: #fff; border: 1px solid #eee; border-radius: 10px; box-shadow: 0 2px 3px #999;}
+.game-header .logo { width: 205px; height: 50px; background: url(img/btn.png); 
+	background-position: 10px 50px;}
+.game-header nav { line-height: 38px; margin-left: 10px;} 
+.game-header nav a { margin: 0 10px; padding: 15px; font-weight: 13px;}
+.query-input { margin-top: 4px;}
+.query-input input{ width: 230px; height: 25px; line-height: 25px; padding: 3px 30px 3px 20px; border: 1px solid #fff; border-radius: 5px; background: #eee; transition: all .5s;}
+.query-input input:focus { background: #fff; box-shadow: 0 0 8px #f60;}
+.query-input a { position: absolute; right: 8px; top: 8px; display: block; width: 20px; height: 20px;  background: url(img/query.png) no-repeat;background-size: 80% 80%;}
+				
+.game-roll { height: 40px; width: 1020px; position: absolute; margin-left: -510px;
+	left: 50%; overflow: hidden; margin-top: 4px; transition: all 1s; z-index: 10;}
+.game-roll:hover { height: 324px;}
+.game-roll-content { position: absolute; left: 0; top: 0; -webkit-transform: rotateY(10deg); transition: all .6s;}
+.game-roll-content:hover { left: 0; top: -40px; -webkit-transform: rotateY(0);}
+.game-roll a { float: left; width: 510px; height: 324px;}
+.game-roll a:nth-of-type(1) { background: url(img/game-roll.jpg); background-position: left top;}
+.game-roll a:nth-of-type(2) { background: url(img/game-roll.jpg); background-position: -510px top;}
+
+.game-images { margin-top: 80px;}
+.game-images li { float: left; width: 23%; margin: 10px 1%; min-height: 100px; padding-bottom: 20px; 
+	border-bottom: 1px solid #ddd;}
+.img-box { display: block; width: 235px; height: 340px; margin: auto; border-radius: 5px; position: relative; transition: all .6s;}
+.img-box:hover { -webkit-transform: scale(1.04); box-shadow: 5px 5px 8px #888;}
+.img-box img { width: 100%;} 
+.img-box > div { height: 100%; overflow: hidden; border-radius: 5px;}
+.sp-new:after { content: ''; display: block; width: 80px; height: 80px; background: url(img/sp-new.png); background-size: 100% 100%; position: absolute; right: -4px; top: -4px; -webkit-animation: flashIn 1s .3s both;}
+.game-images section { margin: 10px 10%;}
+.game-images section h3 { font-size: 16px; color: #666;}
+.game-images section p { font-size: 14px; color: #999;}
+.game-images-square .img-box { width: 235px; height: 235px;}
+
+/*手机*/
+.game-mobile { background: #fff; min-width: 1020px; margin: 0 auto; padding-bottom: 80px; border-bottom: 4px solid #f60;}
+.game-mobile h2 { color: #999; text-align: center; height: 124px; line-height: 124px; font-size: 35px;}
+.mobile-games { width: 900px; margin: auto;}
+.mobile-games > a { float: left; width: 25%; text-align: center;}
+.mobile-games a img { width: 115px; height: 115px; -webkit-transform-origin: top;}
+
+/*底部*/
+.game-footer { background: #333; padding: 50px 0;}
+.game-footer > div { width: 980px; margin: auto; text-align: center;}
+
+/*动画相关*/
+@-webkit-keyframes flashIn{
+	from { -webkit-transform: scale(2); opacity: 0;}
+	to { -webkit-transform: scale(1); opacity: 1;}
+}
+
+@-webkit-keyframes waver{
+	0% { -webkit-transform: rotate(0deg);}
+	10% { -webkit-transform: rotate(2deg);}
+	30% { -webkit-transform: rotate(-2deg);}
+	60% { -webkit-transform: rotate(1deg);}
+	80% { -webkit-transform: rotate(-1deg);} 
+	100% { -webkit-transform: rotate(0);}
+}
+
+.waver { -webkit-animation: waver 4s;}

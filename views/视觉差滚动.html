@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<link rel="stylesheet" href="../themes/common/reset.css"/>
+		<link rel="shortcut icon" href="../public/img/balloon.png"/>
+		<style>
+			.container {
+			    /* 滚动容器 */
+			    perspective: 1px; 
+			    padding: 0; 
+			    height: calc(100vh); 
+			    overflow: auto;
+			}
+			.box {
+			    /* 视差元素的父级需要3D视角 */
+			    height: 1280px;
+			    transform-style: preserve-3d;
+			    position: relative;
+			}
+			.background {
+				height: 1000px;
+			    /* 滚动比较慢的背景元素 */
+			    transform: translate3D(-50%, -120px, -1px) scale(2);
+			}
+		</style>
+		<title>页面标题</title>
+	</head>
+	<body>
+	<div class="container">
+		<div class="box" style="background: #eee">
+			<img class="background" src="../public/img/1.jpg">
+			<div style=" width: 50px; height: 50px; background: yellow; position: absolute; left: 10%; top: 30px;">
+			</div>
+			<div style=" width: 50px; height: 50px; background: green; position: absolute; left: 80%; top: 100px;"></div>
+			<div style=" width: 50px; height: 50px; background: grey; position: absolute; left: 60%; top: 200px;"></div>
+		</div>
+		<p style="font-size: 40px; line-height: 40px; width: 100px;">
+			ABC
+			<span style="font-size: 15px;">abcabcabcabcabcabacbacabcbac</span>
+		</p>
+	</div>
+	<script src="../public/libs/jquery.js"></script>
+	<script>
+		var timer;
+		var counter = 0;
+		$('.container').bind('mousewheel',function(){
+			var delta = event.wheelDelta		//除火狐之外浏览器
+			if(delta<0){		//向下滚动
+				clearInterval(timer);
+				counter = 0;
+				timer = setInterval(function(){
+					if(counter>180){
+						clearInterval(timer)
+						return;
+					}
+					console.log('auto down')
+					$('.container').scrollTop($('.container').scrollTop()+5);
+					counter++;
+				},5)
+			}else{				//向上移动
+				clearInterval(timer);
+				counter = 0;
+				timer = setInterval(function(){
+					if($('.container').scrollTop()==0 || counter>180){
+						clearInterval(timer)
+						return;
+					}
+					console.log('auto up')
+					$('.container').scrollTop($('.container').scrollTop()-5);
+					counter++;
+				},5)
+			}
+			event.preventDefault();
+		});
+	</script>
+	</body>
+</html>

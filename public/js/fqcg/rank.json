@@ -1,0 +1,52 @@
+[
+	{
+		"img":"../../themes/fqcg/img/head.png",
+		"name": "MILA",
+		"time": "40"
+	},
+	{
+		"img":"../../themes/fqcg/img/head.png",
+		"name": "AIRL",
+		"time": "44"
+	},
+	{
+		"img":"../../themes/fqcg/img/head.png",
+		"name": "BENY",
+		"time": "45"
+	},
+	{
+		"img":"../../themes/fqcg/img/head.png",
+		"name": "TOM",
+		"time": "46"
+	},
+	{
+		"img":"../../themes/fqcg/img/head.png",
+		"name": "JERRY",
+		"time": "48"
+	},
+	{
+		"img":"../../themes/fqcg/img/head.png",
+		"name": "MIKASA",
+		"time": "50"
+	},
+	{
+		"img":"../../themes/fqcg/img/head.png",
+		"name": "INORI",
+		"time": "53"
+	},
+	{
+		"img":"../../themes/fqcg/img/head.png",
+		"name": "TALEN",
+		"time": "54"
+	},
+	{
+		"img":"../../themes/fqcg/img/head.png",
+		"name": "ALISA",
+		"time": "55"
+	},
+	{
+		"img":"../../themes/fqcg/img/head.png",
+		"name": "ASUKA",
+		"time": "56"
+	}
+]

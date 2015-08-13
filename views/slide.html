@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0 ,user-scalable=no"/>
+		<link rel="stylesheet" href="../themes/common/reset.css"/>
+		<link rel="stylesheet" href="../themes/islider/jscss.css"/>
+		<link rel="shortcut icon" href="../public/img/balloon.png"/>
+		<style type="text/css">
+			#slider-img { width: 50%; height: 400px; margin: 0 auto; border: 1px solid #000000;}
+			#slider-dom { width: 100%; height: 800px; margin: 20px auto; border: 1px solid #000000;}
+			
+			.page { padding: 20px;}
+			.page h1,h2,p{ position: relative; }
+
+
+			.fadeInLeft { -webkit-animation: fadeInLeft 1s both ease-out;}
+			.fadeInTopDelay { -webkit-animation: fadeInTop 1s 1s both ease-out;} 
+			.fadeInRightDelay { -webkit-animation: fadeInRight 1s 2s both ease-out; }
+				
+			@-webkit-keyframes fadeInLeft {
+				from { left: -10em; opacity:0 ;}
+				to { left: 0; opacity: 1;}
+			}
+
+			@-webkit-keyframes fadeInTop {
+				from { top: -20px; opacity:0 ;}
+				to { top: 0; opacity: 1;}
+			}
+			
+			@-webkit-keyframes fadeInRight {
+				from { right: -10em; opacity: 0;}
+				to { right: 0; opacity: 1;}
+			}
+			
+		</style>
+		<title>页面标题</title>
+	</head>
+	<body>
+
+	<!-- 图片轮播 -->
+	<div class="iSlider-effect" id="slider-img" ></div>	<!-- 容器需要iSlider-effect这个class -->
+	<!-- 使用islider插件。滑动快的容器元素的高度必须指定，可以动态设置高度为 设备高度*原图比例  （height：calc( 100vw * 比例 )）-->
+	<nav >
+		<ul id="animation-nav">
+			<li class="active"></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</nav>
+
+	<!-- 文档轮播 -->
+	<div class="iSlider-effect" id="slider-dom" ></div>
+
+	<script src="../public/libs/jquery.js"></script>
+	<script src="../public/libs/islider/islider.js"></script>
+	<script>
+					// width height 这里写上图片原来的宽高度(用到的是比例)	
+					// ,使得插件可以自动将图片与外部容器调整（图片保持比例并填满高度或者宽度）
+					// ,不写固定填满宽度
+		var picList = [
+	        {
+	            width: 320,						
+	            height: 480,
+	            content: "../public/img/1.jpg"
+	        },
+	        {
+	            width: 320,
+	            height: 480,
+	            content: "../public/img/2.jpg"
+	        },
+	        {
+	            width: 320,
+	            height: 480,
+	            content: "../public/img/3.jpg"
+	        },
+	        {
+	            width: 320,
+	            height: 480,
+	           content: "../public/img/4.jpg"
+	        }];
+
+	        //all animation effect
+	        var islider1 = new iSlider({
+	            data: picList,
+	            dom: $("#slider-img")[0],
+	            duration: 2000,
+	            animateType: 'flip',
+	            isAutoplay: true,
+	            isLooping: true,
+	            onslideend: function(index){
+	            	$('#animation-nav li').removeClass('active').eq(index).addClass('active');
+	            },
+	            onslidechange: function(index){
+	            	$('#animation-nav li').removeClass('active').eq(index).addClass('active');
+	            }
+	            //isVertical: true, //是否垂直滚动
+	        });
+
+
+
+
+	        var domList = [
+	        {
+	            height : '100%',
+	            width : '100%',
+	            content : 
+	            	'<div class="page">\
+	            		<h1 class="page-title fadeInLeft">Home</h1>\
+	            		<h2 class="fadeInTopDelay">This is home page</h2>\
+	            		<p class="fadeInRightDelay">home is pretty awsome</p>\
+	            	</div>'
+	        },{
+	            height : '100%',
+	            width : '100%',
+	            content :  
+	            	'<div class="page">\
+	            		<h1 class="page-title fadeInLeft">Page1</h1>\
+	            		<h2 class="fadeInTopDelay">This is Page1</h2>\
+	            		<p class="fadeInRightDelay">Page1 is pretty awsome</p>\
+	            	</div>'
+	        },{
+	            height : '100%',
+	            width : '100%',
+	            content :  
+	            	'<div class="page">\
+	            		<h1 class="page-title fadeInLeft">Page2</h1>\
+	            		<h2 class="fadeInTopDelay">This is Page2</h2>\
+	            		<p class="fadeInRightDelay">Page2 is pretty awsome</p>\
+	            	</div>'
+	        },{
+	            height : '100%',
+	            width : '100%',
+	            content :  
+	            	'<div class="page">\
+	            		<h1 class="page-title fadeInLeft">Page3</h1>\
+	            		<h2 class="fadeInTopDelay">This is Page3</h2>\
+	            		<p class="fadeInRightDelay">Page3 is pretty awsome</p>\
+	            	</div>'
+	        }];
+
+	        var islider2 = new iSlider({
+	            data: domList,
+	            type: 'dom',			//默认type是pic
+	            dom: $("#slider-dom")[0],
+	            animateType: 'default',
+	            isAutoplay: false,
+	            isLooping: false,
+	            transitionTime: 2,
+	            onslideend: function(index){
+	            	console.log('index: '+index);
+	     //        	console.log('index: ' + (index+1)%(domList.length-1));
+	     //        	var curIndex = (index+1)%(domList.length-1);
+	     //        	var pagehtml = $('#slider-dom ul li').eq(curIndex).find('div').html();
+	     //        	setTimeout(function(){
+						// $('#slider-dom ul li').eq(curIndex).find('div').empty().append(pagehtml);
+	     //        	},2000);
+	            }
+	        });
+
+        </script>
+	</body>
+</html>
