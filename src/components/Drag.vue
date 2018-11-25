@@ -1,5 +1,5 @@
 <template>
-  <div class="ui-draggable" @mousedown="msdown($event)" @mousemove="msmove($event)">
+  <div class="ui-draggable" @mousedown="msdown($event)">
     <slot></slot>
   </div>
 </template>
@@ -14,19 +14,34 @@
     methods: {
       msdown (event) {
         this.isMouseDown = true
+        this.x = event.clientX
+        this.y = event.clientY
+        this.l = event.target.offsetLeft
+        this.t = event.target.offsetTop
         this.$emit('dragstart', event)
-      },
-      msmove (event) {
-        if (this.isMouseDown) {
-          this.$emit('dragmove', event)
-        }
+        event.preventDefault()
       }    
     },
     mounted () {
-      window.addEventListener('mouseup', () => {
-        this.$emit('dragend')
-        this.isMouseDown = false
+      window.addEventListener('mousemove', event => {
+        if (this.isMouseDown) {
+          const nx = event.clientX
+          const ny = event.clientY
+
+          const nl = this.l + (nx- this.x)
+          const nt = this.t + (ny- this.y)
+          this.$emit('dragmove', { left: nl, top: nt }, event)
+        }
+      })
+      window.addEventListener('mouseup', event => {
+        if (this.isMouseDown) {
+          this.$emit('dragend')
+          this.isMouseDown = false
+        }
       })
     }
   }
 </script>
+<style>
+  .ui-draggable { display: inline-block; cursor: move }
+</style>
