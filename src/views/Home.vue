@@ -1,17 +1,33 @@
 <template>
-  <div class="home">
-    <Drag @dragstart="event => dragstart(event, htmlTemplate[0])" @dragmove="(offset, event) => dragmove(offset, event, htmlTemplate[0])" @dragend="event => dragend(event, htmlTemplate[0])"><div style="width: 100px; height: 40px; border: 1px solid red">drag1</div></Drag>
-    <Drag @dragstart="event => dragstart(event, htmlTemplate[1])" @dragmove="(offset, event) => dragmove(offset, event, htmlTemplate[1])" @dragend="event => dragend(event, htmlTemplate[1])"><div style="width: 500px; height: 40px; border: 1px solid blue">drag2</div></Drag>
-    <div style="width: 300px; border: 1px solid red; height: 500px; position: relative; margin-left: 100px" id="dropzone">
+  <div>
+    <template v-if="dropzone">
+      <Drag :dropzone="dropzone" @droped="droped(htmlTemplate[0])">
+        <div style="width: 100px; height: 40px; border: 1px solid #aaa">单行输入框</div>
+      </Drag>
+      <Drag :dropzone="dropzone" @droped="droped(htmlTemplate[1])" style="margin-left: 10px">
+        <div style="width: 200px; height: 40px; border: 1px solid #aaa">数字输入框</div>
+      </Drag>
+      <Drag :dropzone="dropzone" @droped="droped(htmlTemplate[2])">
+        <div style="width: 100px; height: 40px; border: 1px solid #aaa">三行输入框</div>
+      </Drag>
+    </template>
+
+    <div style="width: 300px; border: 1px solid #aaa; height: 500px; position: relative; margin-left: 100px" id="dropzone" @click="exportForm">
     </div>
-    <div id="proxyContainer" style="z-index: 1">
-      <div class="drop-zone-mark"></div>
+
+    <div v-if="editOptions" style="border: 1px solid #aaa">
+      type:<input v-model="editOptions.type">
+      label:<input v-model="editOptions.label">
+      placeholder:<input v-model="editOptions.placeholder">
     </div>
   </div>
 </template>
-
 <script>
   import Drag from '@/components/Drag'
+  import FormItem from '@/components/FormItem'
+  import Vue from 'vue'
+  import store from '@/store'
+
   export default {
     name: 'home',
     components: {
@@ -20,56 +36,39 @@
     data() {
       return {
         htmlTemplate: [{
-          width: 100,
-          height: 40,
-          htmlStr: `<div style="width: 100px; height: 40px; outline: 1px solid red">drag1</div>`
+          type: 'input',
+          label: '单行输入框',
+          placeholder: '请输入'
         },{
-          width: 100,
-          height: 40,
-          htmlStr: `<div style="width: 500px; height: 40px; outline: 1px solid blue">drag2</div>`
+          type: 'input',
+          label: '数字输入框',
+          placeholder: '请输入数字'
+        },{
+          type: 'input',
+          label: '什么输入框',
+          placeholder: '请输入什么'
         }],
-        proxyedElement: null
+        editOptions: null,
+        dropzone: null
       }
     },
     methods: {
-      dragstart(event, { htmlStr }) {
-        const element = event.target
-        if (this.proxyedElement !== element) {
-          const container = document.getElementById('proxyContainer')
-          container.childNodes.forEach(node => {
-            node.parentNode.removeChild(node)
-          })
-          container.innerHTML = htmlStr
-        }
-        this.proxyedElement = element
+      droped(options) {
+        this.dropzone.insertTemplateToMark(options, item => {
+          this.editOptions = item.$props.options
+        })
       },
-      dragmove({ left, top }, event, template) {
-        const container = document.getElementById('proxyContainer')
-        
-        container.style.left = left + 'px'
-        container.style.top = top + 'px'
-        container.style.display = 'block'
-
-        const width = event.target.offsetWidth
-        const height = event.target.offsetHeight
-
-        this.dropzone.detectMove({ left, top }, template)
-      },
-      dragend(event) {
-        const container = document.getElementById('proxyContainer')
-        container.style.display = 'none'
-        if (this.dropzone.isHover) {
-          this.dropzone.insertTemplate()
-        }
-      },
+      exportForm() {
+        console.log(this.dropzone.formItems)
+      }
     },
     mounted () {
-      const dropzoneElement = document.getElementById('dropzone')
-      this.dropzone = new DropZone(dropzoneElement, {
-        left: dropzoneElement.offsetLeft,
-        top: dropzoneElement.offsetTop,
-        width: dropzoneElement.offsetWidth,
-        height: dropzoneElement.offsetHeight
+      const el = document.getElementById('dropzone')
+      this.dropzone = new DropZone(el, {
+        left: el.offsetLeft,
+        top: el.offsetTop,
+        width: el.offsetWidth,
+        height: el.offsetHeight
       })
     }
   }
@@ -82,56 +81,100 @@
     this.height = height
     this.formatBlockHeight = 40
     this.isHover = false
-
-    this.initMark()
-  }
-  DropZone.prototype.initMark = function () {
-    this.mark = document.createElement('div')
-    this.mark.className = 'drop-zone-mark'
-    this.el.appendChild(this.mark)
+    this.formItems = []
   }
 
-  DropZone.prototype.detectMove = function ({ left, top }, template) {
-    const width = template.width, height = template.height
+  DropZone.prototype.detectMove = function ({ left, top, width, height }) {
+    // 获取横纵坐标跨度
     const minx = left, maxx = left + width, miny = top, maxy = top + height
+    // 元素位置+宽高检测hover, x y轴均有交集即为hover
     if (!(minx > this.left + this.width || maxx < this.left) && !(miny > this.top + this.height || maxy < this.top)) {
-      const no = Math.floor((top - this.top)/this.formatBlockHeight)
-      const formatBlockNo = no > 0 ? no : 0
-      this.showMark(formatBlockNo, template)
+      // 根据formatBlockHeight属性 检测元素插入位置
+      const maxIndex = this.el.childNodes.length - 1
+      const index = Math.floor((top - this.top)/this.formatBlockHeight)
+      const blockIndex = index < 0 ? 0 : (index > maxIndex ? maxIndex : index) 
 
+      // 已有mark 位置相同时不做操作
+      if (this.isHover && this.insertingTemplate && this.insertingTemplate.blockIndex === blockIndex) {
+        return
+      }
+      this.addMark(blockIndex)
       this.isHover = true
       this.insertingTemplate = {
-        formatBlockNo,
-        template
+        blockIndex
       }
     } else {
+      // 未hover时移除mark
       this.isHover = false
-      this.mark && this.hideMark()
+      this.insertingTemplate = null
+      this.removeMark()
     }
   }
 
-  DropZone.prototype.showMark = function (formatBlockNo, template) {
-    this.mark.style.display = 'block'
-    const markTop = formatBlockNo * this.formatBlockHeight
-    this.mark.style.top =  markTop + 'px'
+  DropZone.prototype.addMark = function (blockIndex) {
+    this.removeMark()
+    this.mark = document.createElement('div')
+    this.mark.className = 'drop-zone-mark'
+    const before = this.el.childNodes[blockIndex]
+    this.el.insertBefore(this.mark, before)
   }
 
-  DropZone.prototype.hideMark = function () {
-    this.mark.style.display = 'none'
+  DropZone.prototype.removeMark = function () {
+    if (this.mark) {
+      this.mark.parentNode.removeChild(this.mark)
+      this.mark = null
+    }
   }
 
-  DropZone.prototype.insertTemplate = function () {
-    console.log(this.insertingTemplate)
-    const d = document.createElement('div')
-    d.innerHTML = this.insertingTemplate.template.htmlStr
-    const beforeElement = this.el.childNodes[this.insertingTemplate.formatBlockNo + 1]
-    console.log(this.insertingTemplate.formatBlockNo + 1)
-    this.el.insertBefore(d, beforeElement)
-    this.mark.style.display = 'none'
+  DropZone.prototype.insertTemplateToMark = function (options, selected) {
+    if (this.insertingTemplate) {
+      this.removeMark()
+      // 创建并插入空div用于挂载FormItem
+      const div = document.createElement('div')
+      const beforeElement = this.el.childNodes[this.insertingTemplate.blockIndex]
+      this.el.insertBefore(div, beforeElement)
+
+      const _this = this
+      // 初始化参数是一个复制
+      const newOptions = JSON.parse(JSON.stringify(options))
+      const formItemConstructor = Vue.extend(FormItem)
+      const formItem = new formItemConstructor({
+        store,
+        el: div,
+        propsData: {
+          dropzone: _this,
+          options: newOptions,
+          onmousedown (event) {
+            selected && selected(formItem)
+          }
+        }
+      })
+      selected && selected(formItem)
+      // 同步数据模型
+      this.formItems.splice(this.insertingTemplate.blockIndex, 0, formItem)
+      this.isHover = false
+      this.insertingTemplate = null
+    }
+  }
+
+  DropZone.prototype.moveTemplateToMark = function(item) {
+    if (this.insertingTemplate) {
+      this.removeMark()
+      const switchFrom = this.formItems.indexOf(item)
+      const switchTo = this.insertingTemplate.blockIndex
+      // 差值1以内没有移动
+      if (Math.abs(switchTo - switchFrom) > 1) {
+        // 下标越界即为append
+        const beforeElement = this.el.childNodes[switchTo]
+        this.el.insertBefore(item.$el, beforeElement)
+        // 同步数据模型
+        this.formItems.splice(switchFrom, 1) 
+        this.formItems.splice(switchTo-1, 0, item) 
+      }
+    }
   }
 </script>
 
 <style>
-  #proxyContainer { position: absolute; cursor: move }
-  .drop-zone-mark { position: absolute; border: 1px solid red; width: 100% }
+  .drop-zone-mark { border: 1px solid red; width: 100%; margin: 5px 0;}
 </style>
