@@ -108,6 +108,6 @@
   }
 </script>
 <style>
-  .proxy-container { position: absolute; cursor: move }
+  .proxy-container { position: fixed; cursor: move }
   .ui-draggable { display: inline-block; cursor: move; }
 </style>
