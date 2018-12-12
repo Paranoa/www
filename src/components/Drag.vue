@@ -5,17 +5,12 @@
 </template>
 <script>
   import { mapState } from 'vuex'
+  import { getOffset } from '@/util'
   export default {
     name: 'drag',
     props: {
-      dropzone: {
-        type: Object,
-        default: null
-      }
-    },
-    data () {
-      return {
-        isMouseDown: false
+      dropzoneName: {
+        type: String,
       }
     },
     computed: {
@@ -36,15 +31,19 @@
         this.t = t
 
         const htmlStr = this.$el.innerHTML
+        // 复制组件的innerHtml用于拖拽显示
         if (this.proxyedElement !== element) {
           this.proxyContainer.innerHTML = htmlStr
         }
         this.$store.commit('setProxyElement', element)
-        this.$emit('dragstart', event, htmlStr)
+        this.$emit('dragstart', event)
       }    
     },
     mounted () {
       const vm = this
+      console.log(this.$vnode.context.$refs)
+      this.dropzone = this.$vnode.context.$refs[this.dropzoneName]
+      this.$emit('dropzoneLoaded', this.dropzone)
       if (!this.proxyContainer) {
         const el = document.createElement('div')
         el.className = 'proxy-container'
@@ -56,6 +55,7 @@
         if (this.isMouseDown) {
           const nx = event.clientX
           const ny = event.clientY
+          // 计算mousemove偏移量
           const nl = this.l + (nx - this.x)
           const nt = this.t + (ny - this.y)
 
@@ -71,8 +71,9 @@
 
           this.$emit('dragmove', event, offsets)
 
-          if (vm.dropzone) {
-            vm.dropzone.detectMove(offsets)
+          if (this.dropzone) {
+            // this.dropzone.detectMove(offsets)
+            this.dropzone.$emit('draggableMove', offsets)
           }
         }
       })
@@ -83,31 +84,26 @@
           this.isMouseDown = false
           this.$emit('dragend', event)
 
-          if(vm.dropzone && vm.dropzone.isHover) {
-            vm.dropzone.isHover = false
-            this.$emit('droped')
+          // if(this.dropzone && this.dropzone.isHover) {
+          //   this.dropzone.isHover = false
+          //   this.$emit('droped')
+          // }
+
+          if (this.dropzone) {
+            this.dropzone.$emit('draggableDragend', isHover => {
+              if (isHover) {
+                this.$emit('droped')
+              }
+            })
           }
         }
       })
     }
   }
 
-  function getOffset(node, offset) {
-    if (!offset) {
-      offset = {
-        left: 0,
-        top: 0
-      }
-    }
-    if (node === document.body) {
-      return offset
-    }
-    offset.left += node.offsetLeft
-    offset.top += node.offsetTop
-    return getOffset(node.offsetParent, offset)
-  }
+  
 </script>
 <style>
-  .proxy-container { position: fixed; cursor: move }
+  .proxy-container { position: fixed; cursor: move; display: none }
   .ui-draggable { display: inline-block; cursor: move; }
 </style>

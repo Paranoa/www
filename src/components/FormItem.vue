@@ -1,17 +1,19 @@
 <template>
-  <Drag :dropzone="dropzone" @droped="droped" @dragmove="dragmove" @dragend="dragend">
-    <div @mousedown="mousedown($event)" class="form-item">
-      <i @click.stop="remove($event)" class="form-item-remove">x</i>
-      <label>{{ options.label }}</label>
-      <span style="float: right">
-        <template v-if="type === 'singleInput'">
-          <span>{{ placeholder }}</span>
-        </template>
-        <template v-else-if="type === 'singleSelect'">
-          <span>{{ placeholder }} ></span>
-        </template>
-      </span>
-    </div>
+  <Drag :dropzoneName="dropzoneName" @droped="droped" @dragmove="dragmove" @dragend="dragend" @dropzoneLoaded="dropzoneLoaded">
+    <template v-if="type === 'singleInput'">
+      <div @mousedown="mousedown($event)" class="form-item">
+        <i @click.stop="remove($event)" class="form-item-remove">x</i>
+        <label>{{ options.label }}</label>
+        <span class="fr">{{ placeholder }}</span>
+      </div>
+    </template>
+    <template v-else-if="type === 'singleSelect'">
+      <div @mousedown="mousedown($event)" class="form-item" style="line-height: 60px">
+        <i @click.stop="remove($event)" class="form-item-remove">x</i>
+        <label>{{ options.label }}</label>
+        <span class="fr">{{ placeholder }} ></span>
+      </div>
+    </template>
   </Drag>
 </template>
 <script>
@@ -22,6 +24,9 @@
         type: String,
         default: 'singleInput'
       },
+      dropzoneName: {
+        type: String
+      },
       options: {
         type: Object,
         default () {
@@ -30,10 +35,6 @@
             placeholder: '请输入'
           }
         }
-      },
-      dropzone: {
-        type: Object,
-        required: true
       },
       onmousedown: {
         type: Function
@@ -48,6 +49,9 @@
       Drag
     },
     methods: {
+      dropzoneLoaded(dropzone) {
+        this.dropzone = dropzone
+      },
       dragmove() {
         if (!/\sdragging|dragging\s/.test(this.$el.className)) {
           this.$el.className += ' dragging'
@@ -57,10 +61,12 @@
         this.$el.className = this.$el.className.replace(/\sdragging|dragging\s/g, '').trim()
       },
       remove() {
-        this.dropzone.removeItem(this)
+        // this.dropzone.removeItem(this)
+        this.dropzone.$emit('removeItem', this)
       },
       droped() {
-        this.dropzone.moveTemplateToMark(this)
+        // this.dropzone.moveTemplateToMark(this)
+        this.dropzone.$emit('moveTemplateToMark', this)
       },
       mousedown (event) {
         if (this.onmousedown && typeof this.onmousedown === 'function') {
@@ -71,7 +77,8 @@
   }
 </script>
 <style>
-  .form-item { height: 40px; line-height: 40px; position: relative; width: 300px; text-align: left; padding: 0 11px; box-sizing: border-box; border: 1px solid #999;}
+  .fr { float: right }
+  .form-item { line-height: 40px; position: relative; width: 300px; text-align: left; padding: 0 11px; box-sizing: border-box; border: 1px solid #999;}
   .form-item:hover {
     border-style: dotted;
     border-color: #38adff;

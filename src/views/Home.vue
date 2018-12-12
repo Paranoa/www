@@ -1,15 +1,21 @@
 <template>
   <div>
-    <div v-if="dropzone" style="margin-bottom: 20px">
-      <Drag :dropzone="dropzone" @droped="droped(htmlTemplate[0])">
+    <div style="margin-bottom: 20px">
+      <Drag :dropzoneName="'dropzone'" @droped="droped(htmlTemplate[0])">
         <div style="width: 100px; height: 40px; border: 1px solid #aaa">单行输入框</div>
       </Drag>
-      <Drag :dropzone="dropzone" @droped="droped(htmlTemplate[1])" style="margin-left: 10px">
+      <Drag :dropzoneName="'dropzone'" @droped="droped(htmlTemplate[1])" style="margin-left: 10px">
         <div style="width: 200px; height: 40px; border: 1px solid #aaa">单选框</div>
       </Drag>
     </div>
     <div style="float:left; width: 300px; border: 1px solid #aaa; height: 500px; position: relative; margin-left: 100px" id="dropzone">
     </div>
+    <drop ref="dropzone" refName="dropzone" style="float:left; width: 300px; border: 1px solid #aaa; height: 500px; position: relative; margin-left: 100px"
+    @templateClicked="onTemplateClicked"
+    @templateRemoved="onTemplateRemoved">
+      <div>
+      </div>
+    </drop>
     <div v-if="editOptions" style="float:left; margin-left: 100px; border: 1px solid #aaa">
       <template v-if="editOptions.type === 'singleInput'">
         单行输入框
@@ -33,17 +39,21 @@
       </template>
     </div>
     <button @click="exportForm">导出</button>
+    <div style="clear: both"></div>
   </div>
 </template>
 <script>
   import Drag from '@/components/Drag'
-  import DropZone from '@/components/DropZone'
+  import DropZone from '@/components/DropZone.js'
+  import Drop from '@/components/DropZone.vue'
   import Vue from 'vue'
+  import { getOffset } from '@/util'
 
   export default {
     name: 'home',
     components: {
-      Drag
+      Drag,
+      Drop
     },
     data() {
       return {
@@ -68,30 +78,41 @@
     },
     methods: {
       droped(options) {
-        this.dropzone.insertTemplateToMark(options)
+        // this.dropzone.insertTemplateToMark(options)
+        this.$refs.dropzone.$emit('insertTemplateToMark', options)
       },
       exportForm() {
         console.log(this.dropzone.formItems)
+      },
+      onTemplateClicked(item) {
+        // 插入一个模板后，设置当前的编辑选项
+        Vue.set(this.editOptions, 'type', item.$props.type)
+        Vue.set(this.editOptions, 'options', item.$props.options)
+      },
+      onTemplateRemoved() {
+        // 删除一个模板后，当前编辑选项设为空
+        vm.editOptions = {}
       }
     },
     mounted () {
-      const vm = this
-      const el = document.getElementById('dropzone')
-      vm.dropzone = new DropZone(el, {
-        left: el.offsetLeft,
-        top: el.offsetTop,
-        width: el.offsetWidth,
-        height: el.offsetHeight,
-        onTemplateClicked(item) {
-          // 插入一个模板后，设置当前的编辑选项
-          Vue.set(vm.editOptions, 'type', item.$props.type)
-          Vue.set(vm.editOptions, 'options', item.$props.options)
-        },
-        onTemplateRemoved() {
-          // 删除一个模板后，当前编辑选项设为空
-          vm.editOptions = {}
-        }
-      })
+      // const vm = this
+      // const el = document.getElementById('dropzone')
+      // const offset = getOffset(el)
+      // this.dropzone = new DropZone(el, {
+      //   left: offset.left,
+      //   top: offset.top,
+      //   width: el.offsetWidth,
+      //   height: el.offsetHeight,
+      //   onTemplateClicked(item) {
+      //     // 插入一个模板后，设置当前的编辑选项
+      //     Vue.set(vm.editOptions, 'type', item.$props.type)
+      //     Vue.set(vm.editOptions, 'options', item.$props.options)
+      //   },
+      //   onTemplateRemoved() {
+      //     // 删除一个模板后，当前编辑选项设为空
+      //     vm.editOptions = {}
+      //   }
+      // })
     }
   }
 </script>
