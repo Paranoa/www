@@ -1,0 +1,9 @@
+<snippet>
+  <content><![CDATA[
+v-for="${1:name} in ${2:target}"
+]]></content>
+  <!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+  <tabTrigger>vf</tabTrigger>
+  <!-- Optional: Set a scope to limit where the snippet will trigger -->
+  <!-- <scope>source.python</scope> -->
+</snippet>
